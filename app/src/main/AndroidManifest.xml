@@ -1,0 +1,61 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.pro_activity">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+                <category android:name="android.intent.category.LAUNCHER"></category>
+            </intent-filter>
+        </activity>
+        <activity android:name=".NewActivity">
+            <intent-filter>
+                <!--隐式Action:intent,当有多个activity都为intent时，会弹出选择框，选择跳转页-->
+                <action android:name="intent"></action>
+                <!--有多个Action，必须配置category-->
+                <category android:name="android.intent.category.DEFAULT"></category>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".WebActivity">
+            <intent-filter>
+                <!--隐式意图，打开浏览器-->
+                <action android:name="android.intent.action.VIEW"></action>
+                <category android:name="android.intent.category.DEFAULT"></category>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:mimeType="text/html"
+                    android:host="www.baidu.com"
+                    android:scheme="http"></data>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LifeActivity"
+            android:launchMode="standard">
+        </activity>
+        <activity android:name=".MyServiceActivity"></activity>
+
+        <!--注册广播broadcast-->
+        <receiver android:name=".PowerReceiver">
+            <!--配置android:priority优先度，-1000~1000,优先级大的先接收到广播
+                            可以在
+                        -->
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.BATTERY_LOW"></action>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".MyService"></service>
+
+        <service android:name=".MyRemoteService">
+            <intent-filter>
+                <action android:name="com.example.pro_activity.REMOTE_SER"></action>
+            </intent-filter>
+        </service>
+    </application>
+</manifest>
